@@ -4,9 +4,10 @@ using UnityEngine;
 using TMPro;
 public class ButtonShop : MonoBehaviour
 {
-
     [SerializeField]
-    Cartera Wallet;
+    string[] posiblesNombres;
+    [SerializeField]
+    Cartera saldo;
     [SerializeField]
     TextMeshProUGUI textButton;
     [SerializeField]
@@ -16,18 +17,15 @@ public class ButtonShop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        nameItem = posiblesNombres[Random.Range(0, posiblesNombres.Length)];
         textButton = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         priceItem = Random.Range(250f, 450f);
-        textButton.text = priceItem.ToString() + " €";
+        textButton.text = nameItem + "\n" + priceItem.ToString() + " €";
+
 
     }
     public void ClickEnBotonDeTienda()
     {
-        Wallet.RestarSaldo(priceItem);
-    }
-    
-    void Update()
-    {
-        
+        saldo.RestarSaldo(nameItem, priceItem);
     }
 }
